@@ -3,7 +3,7 @@ This repository is for deploying kubernetes on centos 7
 ### Setup Master Node: </br>
 
 ### Step-1: Setup Host information on hosts file. </br>
-_You can set ip as per your environment_ 
+**_You can set ip as per your environment_**
 
 hostnamectl set-hostname master-node </br>
 cat <<EOF> /etc/hosts </br>
