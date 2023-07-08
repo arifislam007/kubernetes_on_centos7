@@ -2,7 +2,7 @@
 This repository is for deploying kubernetes on centos 7
 ### Setup Master Node: </br>
 
-#Step-1: Setup Host information on hosts file. </br>
+### Step-1: Setup Host information on hosts file. </br>
 hostnamectl set-hostname master-node </br>
 cat <<EOF> /etc/hosts </br>
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 </br>
@@ -14,7 +14,7 @@ EOF </br>
 #Step-2: disable SElinux and update your firewall rules. </br>
 
 setenforce 0 </br>
-# Permanently disable selinux from /etc/selinux/config </br>
+### Permanently disable selinux from /etc/selinux/config </br>
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config </br>
 
 #Set the following firewall rules </br>
@@ -33,7 +33,7 @@ net.bridge.bridge-nf-call-iptables = 1</br>
 EOF</br>
 sysctl --system</br>
 </br>
-#Step-3: Setup the Kubernetes Repo.</br>
+### Step-3: Setup the Kubernetes Repo.</br>
 </br>
 yum install -y yum-utils device-mapper-persistent-data lvm2</br>
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</br>
@@ -64,17 +64,17 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 yum install -y kubelet kubeadm kubectl docker-ce</br>
 
 
-## disable swap permanently otherwise kubernet service will not start </br>
+#disable swap permanently otherwise kubernet service will not start </br>
 swapoff -a</br>
 
-#Why disable swap on kubernetes?</br>
+### Why disable swap on kubernetes?</br>
 #The idea of kubernetes is to tightly pack instances to as close to 100% utilized as possible. </br>
 #All deployments should be pinned with CPU/memory limits. So if the scheduler sends a pod </br>
 #to a machine it should never use swap at all. You don't want to swap since it'll slow things down.</br>
 #Its mainly for performance.</br>
 
 </br>
-#Initializing Kubernetes master with the following command </br>
+### Initializing Kubernetes master with the following command </br>
 kubeadm init</br>
 
 
@@ -98,7 +98,7 @@ If you forgot to copy the command, or have misplaced it, don’t worry. You can 
 sudo kubeadm token create --print-join-command</br>
 </br>
 
-## Having initialized Kubernetes successfully, you will need to allow your user to start using the cluster
+#Having initialized Kubernetes successfully, you will need to allow your user to start using the cluster
 </br>
 mkdir -p $HOME/.kube</br>
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</br>
@@ -108,12 +108,12 @@ chown $(id -u):$(id -g) $HOME/.kube/config</br>
 kubectl get nodes</br>
 
 </br>
-#Steps-5: Setup Your Pod Network. we will use Weavenet plugin</br>
+### Steps-5: Setup Your Pod Network. we will use Weavenet plugin</br>
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</br>
 
 </br>
 
-#Step-6: Worker Nodes to Join Kubernetes Cluster</br>
+### Step-6: Worker Nodes to Join Kubernetes Cluster</br>
 #Setup Host information on hosts file on node-1. </br>
 hostnamectl set-hostname node-1</br>
 
@@ -121,10 +121,10 @@ hostnamectl set-hostname node-1</br>
 10.200.205.195 node-1 worker-node-1</br>
 10.200.205.196 node-2 worker-node-2</br>
 </br>
-#Step-7: disable SElinux and update your firewall rules.</br>
+### Step-7: disable SElinux and update your firewall rules.</br>
 </br>
 setenforce 0</br>
-## Permanently disable selinux from /etc/selinux/config</br>
+#Permanently disable selinux from /etc/selinux/config</br>
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config</br>
 </br>
 #Set the following firewall rules</br>
@@ -172,13 +172,13 @@ systemctl start docker</br>
 #disable swap</br>
 swapoff -a</br>
 
-## Step-10: Join the Worker Node to the Kubernetes Cluster
+### Step-10: Join the Worker Node to the Kubernetes Cluster
 kubeadm join 10.128.0.27:6443 --token nu06lu.xrsux0ss0ixtnms5  --discovery-token-ca-cert-hash</br> sha256:f996ea3564e6a07fdea2997a1cf8caeddafd6d4360d606dbc82314688425cd41 </br>
 </br>
 #Same configuration with worker node-2 for join kuberbet cluster </br>
 </br>
 
-## Troubleshooting 
+### Troubleshooting 
 Trouble 01: </br>
 “[ERROR CRI]: container runtime is not running: output:” Code Answer</br>
 </br>
