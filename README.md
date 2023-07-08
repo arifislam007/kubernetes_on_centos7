@@ -11,7 +11,7 @@ cat <<EOF> /etc/hosts </br>
 10.200.205.195 node-1 worker-node-1 </br>
 10.200.205.196 node-2 worker-node-2 </br>
 EOF </br>
-#Step-2: disable SElinux and update your firewall rules. </br>
+### Step-2: disable SElinux and update your firewall rules. </br>
 
 setenforce 0 </br>
 ### Permanently disable selinux from /etc/selinux/config </br>
@@ -74,7 +74,7 @@ swapoff -a</br>
 #Its mainly for performance.</br>
 
 </br>
-### Initializing Kubernetes master with the following command </br>
+#Initializing Kubernetes master with the following command </br>
 kubeadm init</br>
 
 
@@ -108,6 +108,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config</br>
 kubectl get nodes</br>
 
 </br>
+
 ### Steps-5: Setup Your Pod Network. we will use Weavenet plugin</br>
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</br>
 
@@ -137,7 +138,8 @@ firewall-cmd  --reload</br>
 modprobe br_netfilter</br>
 echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables</br>
 </br>
-### Step-8: Setup the Kubernetes Repo</br>
+
+### Step-8: Setup the Kubernetes Repo </br>
 </br>
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo</br>
 [kubernetes]</br>
@@ -160,6 +162,7 @@ repo_gpgcheck=1</br>
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</br>
 ## End here </br>
 </br>
+	
 ### Step-9: Install Kubeadm and Docker</br>
 yum install kubeadm docker -y </br>
 </br>
