@@ -60,7 +60,7 @@ repo_gpgcheck=0</br>
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</br>
 #End here </br>
 
-#Step-4: Install Kubeadm and Docker</br>
+### Step-4: Install Kubeadm and Docker</br>
 yum install -y kubelet kubeadm kubectl docker-ce</br>
 
 
@@ -137,7 +137,7 @@ firewall-cmd  --reload</br>
 modprobe br_netfilter</br>
 echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables</br>
 </br>
-#Step-8: Setup the Kubernetes Repo</br>
+### Step-8: Setup the Kubernetes Repo</br>
 </br>
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo</br>
 [kubernetes]</br>
@@ -160,7 +160,7 @@ repo_gpgcheck=1</br>
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</br>
 ## End here </br>
 </br>
-#Step-9: Install Kubeadm and Docker</br>
+### Step-9: Install Kubeadm and Docker</br>
 yum install kubeadm docker -y </br>
 </br>
 #enable and start both services</br>
