@@ -1,9 +1,6 @@
 # kubernetes_on_centos7
 This repository is for deploying kubernetes on centos 7
-
-https://www.hostafrica.co.za/blog/new-technologies/install-kubernetes-delpoy-cluster-centos-7/
-
-#Setup Master Node: </br>
+### Setup Master Node: </br>
 
 #Step-1: Setup Host information on hosts file. </br>
 hostnamectl set-hostname master-node </br>
